@@ -42,7 +42,8 @@ class CategoryCrudController extends CrudController
         CRUD::field('name')
             ->type('text');
         CRUD::field('active')
-            ->type('checkbox');
+            ->type('checkbox')
+            ->default(true);
 
         Category::creating(function($entry) {
             $entry->user_id = backpack_user()->id;
