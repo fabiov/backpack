@@ -7,8 +7,12 @@ namespace App\Models;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Account extends Model
+/**
+ * @property float $amount
+ */
+class Movement extends Model
 {
     use CrudTrait;
     use HasFactory;
@@ -19,12 +23,16 @@ class Account extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'accounts';
+    protected $table = 'movements';
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     protected $guarded = ['id'];
     // protected $fillable = [];
     // protected $hidden = [];
+
+    protected $casts = [
+        'amount' => 'float',
+    ];
 
     /*
     |--------------------------------------------------------------------------
@@ -37,6 +45,15 @@ class Account extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+    public function account(): BelongsTo
+    {
+        return $this->belongsTo(Account::class);
+    }
+
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
+    }
 
     /*
     |--------------------------------------------------------------------------
