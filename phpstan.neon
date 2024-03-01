@@ -1,0 +1,12 @@
+parameters:
+	checkGenericClassInNonGenericObjectType: false
+	level: 0
+	paths:
+		- app
+		- database
+		- routes
+		- tests
+	ignoreErrors:
+		- "#^Function backpack_(auth|url|user) not found\\.$#"
+includes:
+	- phpstan-baseline.neon

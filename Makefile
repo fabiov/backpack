@@ -10,6 +10,9 @@ help:
 	@echo "${bold}Interactive terminals${reset}"
 	@echo "${green}sh${reset}		Web container console as www-data user"
 	@echo ""
+	@echo "${bold}Quality tools${reset}"
+	@echo "${green}phpstan,sa${reset}		PHP Static Analysis Tool"
+	@echo ""
 	@echo "${bold}Miscellaneous Macro${reset}"
 	@echo "${green}fresh-db${reset}	Initialize database with some data"
 
@@ -28,6 +31,13 @@ down:
 
 sh: up
 	@./vendor/bin/sail shell
+
+# Quality tools ########################################################################################################
+
+phpstan sa:
+	@echo "🏃 ${green}Running PHP Static Analysis Tool...${reset}"
+	@if ! docker-compose ps --service --filter 'status=running' | grep php > /dev/null; then ./vendor/bin/sail up -d && echo; fi
+	@docker-compose exec --user sail php vendor/bin/phpstan
 
 # Miscellaneous Macro ##################################################################################################
 
