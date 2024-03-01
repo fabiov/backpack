@@ -36,8 +36,7 @@ sh: up
 
 phpstan sa:
 	@echo "🏃 ${green}Running PHP Static Analysis Tool...${reset}"
-	@if ! docker-compose ps --service --filter 'status=running' | grep php > /dev/null; then ./vendor/bin/sail up -d && echo; fi
-	@docker-compose exec --user sail php vendor/bin/phpstan
+	@./vendor/bin/sail php vendor/bin/phpstan
 
 # Miscellaneous Macro ##################################################################################################
 
