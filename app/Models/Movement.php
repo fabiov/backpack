@@ -24,6 +24,7 @@ class Movement extends Model
     */
 
     protected $table = 'movements';
+
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     protected $guarded = ['id'];

@@ -9,16 +9,16 @@ use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 /**
  * Class ProvisionCrudController
- * @package App\Http\Controllers\Admin
+ *
  * @property-read \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $crud
  */
 class ProvisionCrudController extends CrudController
 {
-    use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
@@ -28,7 +28,7 @@ class ProvisionCrudController extends CrudController
     public function setup()
     {
         CRUD::setModel(\App\Models\Provision::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/provision');
+        CRUD::setRoute(config('backpack.base.route_prefix').'/provision');
         CRUD::setEntityNameStrings('provision', 'provisions');
     }
 
@@ -36,6 +36,7 @@ class ProvisionCrudController extends CrudController
      * Define what happens when the List operation is loaded.
      *
      * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
+     *
      * @return void
      */
     protected function setupListOperation()
@@ -51,7 +52,7 @@ class ProvisionCrudController extends CrudController
     protected function setupCreateOperation(): void
     {
         CRUD::setValidation(ProvisionRequest::class);
-//        CRUD::setFromDb(); // set fields from db columns.
+        //        CRUD::setFromDb(); // set fields from db columns.
 
         CRUD::addFields([
             [
@@ -63,7 +64,7 @@ class ProvisionCrudController extends CrudController
                 'label' => 'Amount',
                 'name' => 'amount',
                 'type' => 'number',
-                'attributes' => ["step" => "0.01"],
+                'attributes' => ['step' => '0.01'],
             ],
             [
                 'label' => 'Description',
@@ -72,7 +73,7 @@ class ProvisionCrudController extends CrudController
             ],
         ]);
 
-        Provision::creating(function($entry) {
+        Provision::creating(function ($entry) {
             $entry->user_id = backpack_user()->id;
         });
     }
@@ -81,6 +82,7 @@ class ProvisionCrudController extends CrudController
      * Define what happens when the Update operation is loaded.
      *
      * @see https://backpackforlaravel.com/docs/crud-operation-update
+     *
      * @return void
      */
     protected function setupUpdateOperation()

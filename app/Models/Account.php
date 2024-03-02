@@ -20,6 +20,7 @@ class Account extends Model
     */
 
     protected $table = 'accounts';
+
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     protected $guarded = ['id'];

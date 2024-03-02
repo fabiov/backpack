@@ -9,21 +9,21 @@ use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 /**
  * Class CategoryCrudController
- * @package App\Http\Controllers\Admin
+ *
  * @property-read \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $crud
  */
 class CategoryCrudController extends CrudController
 {
-    use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
 
     public function setup(): void
     {
         CRUD::setModel(\App\Models\Category::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/category');
+        CRUD::setRoute(config('backpack.base.route_prefix').'/category');
         CRUD::setEntityNameStrings('category', 'categories');
     }
 
@@ -45,7 +45,7 @@ class CategoryCrudController extends CrudController
             ->type('checkbox')
             ->default(true);
 
-        Category::creating(function($entry) {
+        Category::creating(function ($entry) {
             $entry->user_id = backpack_user()->id;
         });
     }

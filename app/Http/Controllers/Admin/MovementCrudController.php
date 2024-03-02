@@ -10,25 +10,24 @@ use App\Models\Category;
 use App\Models\Movement;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
-use Illuminate\Support\Carbon;
 
 /**
  * Class MovementCrudController
- * @package App\Http\Controllers\Admin
+ *
  * @property-read \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $crud
  */
 class MovementCrudController extends CrudController
 {
-    use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
 
     public function setup(): void
     {
         CRUD::setModel(\App\Models\Movement::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/movement');
+        CRUD::setRoute(config('backpack.base.route_prefix').'/movement');
         CRUD::setEntityNameStrings('movement', 'movements');
     }
 
@@ -63,21 +62,21 @@ class MovementCrudController extends CrudController
         CRUD::addFields([
             [
                 'label' => 'Account',
-                'type'  => 'select',
-                'name'  => 'account_id',
-                'entity'    => 'account',
+                'type' => 'select',
+                'name' => 'account_id',
+                'entity' => 'account',
                 'model' => Account::class, // related model
                 'attribute' => 'name', // foreign key attribute that is shown to user
                 'options' => fn ($query) => $query->orderBy('name', 'ASC')->get(),
             ],
             [
-                'label' => "Category",
-                'type'  => 'select',
-                'name'  => 'category_id',
-                'entity'    => 'category',
-                'model'     => Category::class, // related model
+                'label' => 'Category',
+                'type' => 'select',
+                'name' => 'category_id',
+                'entity' => 'category',
+                'model' => Category::class, // related model
                 'attribute' => 'name', // foreign key attribute that is shown to user
-                'options' => fn ($query)  => $query->orderBy('name', 'ASC')->get(),
+                'options' => fn ($query) => $query->orderBy('name', 'ASC')->get(),
             ],
             [
                 'label' => 'Date',
@@ -101,6 +100,7 @@ class MovementCrudController extends CrudController
      * Define what happens when the Update operation is loaded.
      *
      * @see https://backpackforlaravel.com/docs/crud-operation-update
+     *
      * @return void
      */
     protected function setupUpdateOperation()

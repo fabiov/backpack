@@ -18,6 +18,7 @@ class Provision extends Model
     */
 
     protected $table = 'provisions';
+
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     protected $guarded = ['id'];

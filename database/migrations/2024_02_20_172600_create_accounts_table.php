@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('accounts', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable(false);
-            $table->string('name')->nullable(false);    
+            $table->string('name')->nullable(false);
             $table->enum('status', ['closed', 'open', 'highlight'])->nullable(false);
             $table->timestamps();
 
