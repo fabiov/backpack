@@ -56,21 +56,20 @@ class AccountCrudController extends CrudController
         ]);
     }
 
-    /**
-     * Define what happens when the Create operation is loaded.
-     *
-     * @see https://backpackforlaravel.com/docs/crud-operation-create
-     * @return void
-     */
-    protected function setupCreateOperation()
+    protected function setupCreateOperation(): void
     {
         CRUD::setValidation(AccountRequest::class);
 
-        CRUD::field('name')
-             ->type('text');
-        CRUD::field('status')
-             ->type('select_from_array')
-             ->options(['open' => 'Open', 'highlight' => 'Highlight']);
+        $this->crud->addField([
+            'label' => 'Nome',
+            'name' => 'name',
+            'type' => 'text'
+        ]);
+        $this->crud->addField([
+            'name' => 'status',
+            'type' => 'select_from_array',
+            'options' => ['open' => 'Open', 'highlight' => 'Highlight'],
+        ]);
 
         Account::creating(function($entry) {
             $entry->user_id = backpack_user()->id;
@@ -81,12 +80,16 @@ class AccountCrudController extends CrudController
     {
         CRUD::setValidation(AccountRequest::class);
 
-        CRUD::field('name')
-            ->type('text');
-
-        CRUD::field('status')
-            ->type('select_from_array')
-            ->options(['closed' => 'Closed', 'open' => 'Open', 'highlight' => 'Highlight']);
+        $this->crud->addField([
+            'label' => 'Nome',
+            'name' => 'name',
+            'type' => 'text'
+        ]);
+        $this->crud->addField([
+            'name' => 'status',
+            'type' => 'select_from_array',
+            'options' => ['closed' => 'Closed', 'open' => 'Open', 'highlight' => 'Highlight'],
+        ]);
 
         Account::creating(function($entry) {
             $entry->user_id = backpack_user()->id;

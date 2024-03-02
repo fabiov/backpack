@@ -3,7 +3,7 @@ includes:
 	- phpstan-baseline.neon
 parameters:
 	checkGenericClassInNonGenericObjectType: false
-	level: 1
+	level: 6
 	paths:
 		- app
 		- database

@@ -18,38 +18,26 @@ class MovementRequest extends FormRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
+     * @return array<string, string>
      */
-    public function rules()
+    public function rules(): array
     {
-        return [
-            // 'name' => 'required|min:5|max:255'
-        ];
+        return [];
     }
 
     /**
-     * Get the validation attributes that apply to the request.
-     *
-     * @return array
+     * @return array<string, string>
      */
-    public function attributes()
+    public function attributes(): array
     {
-        return [
-            //
-        ];
+        return [];
     }
 
     /**
-     * Get the validation messages that apply to the request.
-     *
-     * @return array
+     * @return array<string, string>
      */
-    public function messages()
+    public function messages(): array
     {
-        return [
-            //
-        ];
+        return [];
     }
 }
