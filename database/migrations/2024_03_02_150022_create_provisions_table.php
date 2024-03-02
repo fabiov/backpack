@@ -10,22 +10,20 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('movements', function (Blueprint $table) {
+        Schema::create('provisions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('account_id')->nullable(false);
-            $table->unsignedBigInteger('category_id')->nullable(true);
+            $table->unsignedBigInteger('user_id')->nullable(false);
             $table->date('date')->nullable(false);
             $table->decimal('amount', 8, 2)->nullable(false);
             $table->string('description')->nullable(false);
             $table->timestamps();
 
-            $table->foreign('account_id')->references('id')->on('accounts');
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('movements');
+        Schema::dropIfExists('provisions');
     }
 };
