@@ -51,7 +51,7 @@ class MovementCrudController extends CrudController
         ]);
         $this->crud->addColumn([
             'label' => 'Category',
-            'value' => fn ($entity) => $entity->category->name,
+            'value' => fn ($entity) => $entity->category?->name,
         ]);
     }
 

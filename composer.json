@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "ext-pdo": "*",
         "backpack/crud": "^6.6",
         "backpack/theme-tabler": "^1.2",
         "guzzlehttp/guzzle": "^7.2",
