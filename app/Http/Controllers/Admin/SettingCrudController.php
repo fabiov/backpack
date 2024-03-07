@@ -5,15 +5,9 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\SettingRequest;
-use App\Models\Movement;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
-/**
- * Class SettingCrudController
- * @package App\Http\Controllers\Admin
- * @property-read \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $crud
- */
 class SettingCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
@@ -22,16 +16,15 @@ class SettingCrudController extends CrudController
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 
-    /**
-     * Configure the CrudPanel object. Apply settings to all operations.
-     *
-     * @return void
-     */
-    public function setup()
+    public function setup(): void
     {
         CRUD::setModel(\App\Models\Setting::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/setting');
         CRUD::setEntityNameStrings('setting', 'settings');
+
+        $this->crud->operation(['list', 'show', 'update', 'delete'], function() {
+            $this->crud->addClause(fn ($query) => $query->where('id', backpack_user()->id));
+        });
     }
 
     protected function setupListOperation(): void

@@ -9,11 +9,6 @@ use App\Models\Account;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
-/**
- * Class AccountCrudController
- *
- * @property-read \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $crud
- */
 class AccountCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
@@ -22,23 +17,17 @@ class AccountCrudController extends CrudController
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
 
-    /**
-     * Configure the CrudPanel object. Apply settings to all operations.
-     *
-     * @return void
-     */
-    public function setup()
+    public function setup(): void
     {
         CRUD::setModel(\App\Models\Account::class);
         CRUD::setRoute(config('backpack.base.route_prefix').'/account');
         CRUD::setEntityNameStrings('account', 'accounts');
+
+        $this->crud->operation(['list', 'show', 'update', 'delete'], function() {
+            $this->crud->addClause(fn ($query) => $query->where('user_id', backpack_user()->id));
+        });
     }
 
-    /**
-     * Define what happens when the List operation is loaded.
-     *
-     * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
-     */
     protected function setupListOperation(): void
     {
         CRUD::column('id');

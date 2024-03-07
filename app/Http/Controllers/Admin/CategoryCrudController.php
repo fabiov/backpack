@@ -25,11 +25,12 @@ class CategoryCrudController extends CrudController
         CRUD::setModel(\App\Models\Category::class);
         CRUD::setRoute(config('backpack.base.route_prefix').'/category');
         CRUD::setEntityNameStrings('category', 'categories');
+
+        $this->crud->operation(['list', 'show', 'update', 'delete'], function() {
+            $this->crud->addClause(fn ($query) => $query->where('user_id', backpack_user()->id));
+        });
     }
 
-    /**
-     * @see https://backpackforlaravel.com/docs/crud-operation-list-entries
-     */
     protected function setupListOperation(): void
     {
         CRUD::setFromDb(); // set columns from db columns.
